@@ -24,4 +24,17 @@ public class EstoqueService {
     public List<Produto> listarTodosProdutos() {
         return produtoRepository.buscarTodos();
     }
+
+    public Produto adicionarEstoque(Long produtoId, int quantidadeParaAdicionar) {
+        if (quantidadeParaAdicionar <= 0) {
+            throw new IllegalArgumentException("A quantidade a ser adicionada deve ser maior que zero.");
+        }
+
+        Produto produto = produtoRepository.buscarPorId(produtoId)
+                .orElseThrow(() -> new IllegalArgumentException("Produto com ID " + produtoId + " não encontrado."));
+
+        produto.adicionarEstoque(quantidadeParaAdicionar);
+
+        return produto;
+    }
 }

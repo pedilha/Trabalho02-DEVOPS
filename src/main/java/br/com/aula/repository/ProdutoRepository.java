@@ -25,4 +25,7 @@ public class ProdutoRepository {
         return new ArrayList<>(estoque.values());
     }
 
+    public Optional<Produto> buscarPorId(Long id) {
+        return Optional.ofNullable(estoque.get(id));
+    }
 }
